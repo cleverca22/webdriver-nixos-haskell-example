@@ -59,3 +59,33 @@ in
 ```
 
 I think I can do something similar in shell.nix.
+
+Also looking at https://nixos.org/nixpkgs/manual/#sec-modify-via-packageOverrides now:
+
+```
+{
+  packageOverrides = pkgs: rec {
+    foo = pkgs.foo.override { ... };
+  };
+}
+
+```
+
+Okay... so let's search for selenium-server-standalone here: https://nixos.org/nixos/packages.html#selenium and find the source for it is here:
+
+https://github.com/NixOS/nixpkgs/blob/b0dac30ab552a59b772b4fe34c494b107fce01e5/pkgs/development/tools/selenium/server/default.nix#L37
+
+Looks like I can just override minorVersion and patchVersion as soon as I find what's available.
+
+Newest is: selenium-server-standalone-2.53.1.jar
+
+So let's try this:
+
+```
+{
+  packageOverrides = pkgs: rec {
+    selenium-server-standalone = pkgs.selenium-server-standalone.override { majorVersion = 2.53; minorVersion = 1; };
+  };
+}
+```
+
