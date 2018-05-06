@@ -4,7 +4,7 @@ let
 
   inherit (nixpkgs) pkgs;
 
-  f = { mkDerivation, base, chromeDriver
+  f = { mkDerivation, base, chromedriver
       , selenium-server-standalone, stdenv, webdriver
       }:
       mkDerivation {
@@ -15,7 +15,7 @@ let
         isExecutable = true;
         executableHaskellDepends = [ base webdriver ];
         executableSystemDepends = [
-          chromeDriver selenium-server-standalone
+          chromedriver selenium-server-standalone
         ];
         license = stdenv.lib.licenses.bsd3;
       };

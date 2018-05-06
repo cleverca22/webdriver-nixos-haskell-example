@@ -1,4 +1,4 @@
-{ mkDerivation, base, chromeDriver, selenium-server-standalone
+{ mkDerivation, base, chromedriver, selenium-server-standalone
 , stdenv, webdriver
 }:
 mkDerivation {
@@ -9,7 +9,7 @@ mkDerivation {
   isExecutable = true;
   executableHaskellDepends = [ base webdriver ];
   executableSystemDepends = [
-    chromeDriver selenium-server-standalone
+    chromedriver selenium-server-standalone
   ];
   license = stdenv.lib.licenses.bsd3;
 }
