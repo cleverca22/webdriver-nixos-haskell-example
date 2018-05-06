@@ -5,6 +5,20 @@ Trying to get a simple webdriver example working using the webdriver package fro
 
 # Status
 
+Tried overriding name/version/src but got:
+
+```
+[cody@nixos:~/source/webdriver-nixos-haskell-example]$ !!
+nix-shell
+error: anonymous function at /nix/store/wj9akm9hbpqk4ihwcpysvksgvm3z1i0n-nixos-17.09.3142.e02a9ba3670/nixos/pkgs/development/tools/selenium/server/default.nix:1:1 called with unexpected argument ‘src’, at /nix/store/wj9akm9hbpqk4ihwcpysvksgvm3z1i0n-nixos-17.09.3142.e02a9ba
+3670/nixos/lib/customisation.nix:74:12                                                                                                                                                                                                                                          
+(use ‘--show-trace’ to show detailed location information)
+```
+
+Does [the selenium-server-standalone derivation](https://github.com/NixOS/nixpkgs/blob/b0dac30ab552a59b772b4fe34c494b107fce01e5/pkgs/development/tools/selenium/server/default.nix#L14) not allow overriding? I see it uses mkDerivation but I don't see makeOverrideable used anywhere... is it necessary for me to be able to override something?
+
+# Older Status
+
 error:
 
 ```
@@ -88,4 +102,6 @@ So let's try this:
   };
 }
 ```
+
+
 
