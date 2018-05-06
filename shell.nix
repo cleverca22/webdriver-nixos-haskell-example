@@ -1,8 +1,19 @@
 { nixpkgs ? import <nixpkgs> {}, compiler ? "default", doBenchmark ? false }:
 
 let
-
-  inherit (nixpkgs) pkgs;
+  config = {
+    packageOverrides = pkgs: rec {
+      selenium-server-standalone = pkgs.selenium-server-standalone.override {
+                                   name = "selenium-server-standalone-2.53.1";
+                                   version = "2.5.1";
+                                   src = pkgs.fetchurl {
+                                      url = "http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar";
+                                      sha256 = "1cce6d3a5ca5b2e32be18ca5107d4f21bddaa9a18700e3b117768f13040b7cf8";
+                                      };
+                                 };
+    };
+  };
+  pkgs = import <nixpkgs> { inherit config; };
 
   f = { mkDerivation, base, chromedriver
       , selenium-server-standalone, stdenv, webdriver
