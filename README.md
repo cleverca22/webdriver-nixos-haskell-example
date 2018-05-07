@@ -3,13 +3,22 @@
 
 Trying to get a simple webdriver example working using the webdriver package from hackage and native packages selenium-server-standalone and chromeDriver.
 
+
 # Status
+
+Apparently [hs-webdriver](https://github.com/kallisti-dev/hs-webdriver/issues/126) has a bug it looks like... or there was a change in seleniums api before 2.39.0
+
+https://github.com/kallisti-dev/hs-webdriver/issues/126#issuecomment-386928303
+
+# Older Status
 
 Asked on #NixOs and was told to use OverrideAttrs. looked up this example in nixpkgs manual at https://nixos.org/nixpkgs/manual/#sec-pkg-overrideAttrs
 
 helloWithDebug = pkgs.hello.overrideAttrs (oldAttrs: rec {
     separateDebugInfo = true;
 });
+
+That worked, but selenium 2.53.1 also had the bug.. trying older 2.43.1 version. I know at some point I used this package and it worked.
 
 
 # Older Status
