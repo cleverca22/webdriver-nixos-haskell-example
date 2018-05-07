@@ -5,6 +5,15 @@ Trying to get a simple webdriver example working using the webdriver package fro
 
 # Status
 
+Asked on #NixOs and was told to use OverrideAttrs. looked up this example in nixpkgs manual at https://nixos.org/nixpkgs/manual/#sec-pkg-overrideAttrs
+
+helloWithDebug = pkgs.hello.overrideAttrs (oldAttrs: rec {
+    separateDebugInfo = true;
+});
+
+
+# Older Status
+
 Tried overriding name/version/src but got:
 
 ```
