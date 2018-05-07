@@ -1,5 +1,5 @@
 { mkDerivation, base, chromedriver, selenium-server-standalone
-, stdenv, webdriver, jdk, chromium
+, stdenv, webdriver, jdk, chromium, unordered-containers
 }:
 mkDerivation {
   pname = "webdriver-nixos-haskell-example";
@@ -7,7 +7,7 @@ mkDerivation {
   src = ./.;
   isLibrary = false;
   isExecutable = true;
-  executableHaskellDepends = [ base webdriver ];
+  executableHaskellDepends = [ base webdriver unordered-containers];
   executableSystemDepends = [
     chromedriver selenium-server-standalone
   ];

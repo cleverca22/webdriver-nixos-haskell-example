@@ -16,7 +16,7 @@ let
   pkgs = import <nixpkgs> { inherit config; };
 
   f = { mkDerivation, base, chromedriver
-      , selenium-server-standalone, stdenv, webdriver, jdk, chromium
+      , selenium-server-standalone, stdenv, webdriver, jdk, chromium, unordered-containers
       }:
       mkDerivation {
         pname = "webdriver-nixos-haskell-example";
@@ -24,7 +24,7 @@ let
         src = ./.;
         isLibrary = false;
         isExecutable = true;
-        executableHaskellDepends = [ base webdriver ];
+        executableHaskellDepends = [ base webdriver unordered-containers ];
         executableSystemDepends = [
           chromedriver selenium-server-standalone
         ];

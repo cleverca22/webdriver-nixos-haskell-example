@@ -20,6 +20,7 @@ executable webdriver-nixos-haskell-example
   -- other-modules:       
   -- other-extensions:    
   build-depends:       base >=4.9 && <4.11
+                     , unordered-containers
                      , webdriver
   hs-source-dirs:      src
   default-language:    Haskell2010

@@ -1,6 +1,39 @@
 # webdriver-nixos-haskell-example
 
-# Status
+# Status (Working)
+
+Finally got this working after specifying the chrome path and the other previous changes. Just have to start up selenium server first in a nix-shell with:
+
+```
+java -jar /nix/store/88d05cqa56p4dk0dp0v91jjvh0kf9rdw-selenium-server-standalone-2.53.0/share/lib/selenium-server-standalone-2.53.0/selenium-server-standalone-2.53.0.jar -Dwebdriver.chrome.driver=/nix/store/285lapwgrwl4pnay19f82bsxi1d43fnw-chromedriver-2.31/bin/chromedriver -browser "browserName=chrome,version=66.0.3359.139,platform=LINUX"
+```
+
+Then within a nix-shell you can:
+
+```
+cabal run
+```
+
+Alternatively for development you can use:
+
+```
+cabal repl
+```
+
+# Older Status
+
+command:
+
+```
+java -jar /nix/store/88d05cqa56p4dk0dp0v91jjvh0kf9rdw-selenium-server-standalone-2.53.0/share/lib/selenium-server-standalone-2.53.0/selenium-server-standalone-2.53.0.jar -Dwebdriver.chrome.driver=/nix/store/285lapwgrwl4pnay19f82bsxi1d43fnw-chromedriver-2.31/bin/chromedriver -browser "browserName=chrome,version=66.0.3359.139,platform=LINUX"
+```
+
+error:
+
+19:58:29.034 WARN - Exception: unknown error: cannot find Chrome binary
+  (Driver info: chromedriver=2.31.488763 (092de99f48a300323ecf8c2a4e2e7cab51de5ba8),platform=Linux 4.9.86 x86_64) (WARNING: The server 
+
+# Older Status
 
 Trying to get a simple webdriver example working using the webdriver package from hackage and native packages selenium-server-standalone and chromeDriver.
 
@@ -30,6 +63,24 @@ ies [{browserName=safari, version=, platform=MAC}] does not match with current p
 19:44:57.185 INFO - Default driver org.openqa.selenium.chrome.ChromeDriver registration is skipped: registration capabilities Capabilit
 ies [{browserName=chrome, version=, platform=ANY}] does not match with current platform: LINUX                                        
 ```
+
+
+Apparently we can pass in a `-browser` argument like:
+
+```
+-browser "browserName=firefox,version=10.0.12,platform=LINUX"
+```
+
+Nix uses chromium 66.0.3359.139 so it'd be:
+
+```
+-browser "browserName=chrome,version=66.0.3359.139,platform=LINUX"
+```
+
+```
+java -jar /nix/store/88d05cqa56p4dk0dp0v91jjvh0kf9rdw-selenium-server-standalone-2.53.0/share/lib/selenium-server-standalone-2.53.0/selenium-server-standalone-2.53.0.jar -Dwebdriver.chrome.driver=/nix/store/285lapwgrwl4pnay19f82bsxi1d43fnw-chromedriver-2.31/bin/chromedriver -browser "browserName=chrome,version=66.0.3359.139,platform=LINUX"
+```
+
 
 # Older Status
 

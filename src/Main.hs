@@ -2,8 +2,9 @@
 module Main where
 
 import Test.WebDriver
+import qualified Data.HashMap.Strict as HM
 
-chromeConfig = useBrowser chrome defaultConfig
+chromeConfig = useBrowser (Chrome Nothing (Just "/nix/store/r8zwbvrw3077xvjdq0j316nnzz0vr7gy-chromium-64.0.3282.186/bin/chromium") [] [] HM.empty) defaultConfig
 
 main :: IO ()
 main = runSession chromeConfig $ do                      -- starts a WebDriver session with the given firefox config, then
