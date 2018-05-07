@@ -4,11 +4,11 @@ let
   config = {
     packageOverrides = pkgs: rec {
       selenium-server-standalone = pkgs.selenium-server-standalone.overrideAttrs (oldAttrs: rec {
-                                   name = "selenium-server-standalone-2.53.1";
-                                   version = "2.5.1";
+                                   name = "selenium-server-standalone-2.39.0";
+                                   version = "2.39.0";
                                    src = pkgs.fetchurl {
-                                      url = "http://selenium-release.storage.googleapis.com/2.53/selenium-server-standalone-2.53.1.jar";
-                                      sha256 = "1cce6d3a5ca5b2e32be18ca5107d4f21bddaa9a18700e3b117768f13040b7cf8";
+                                      url = "http://selenium-release.storage.googleapis.com/2.39/selenium-server-standalone-2.39.0.jar";
+                                      sha256 = "ae9845ccfb10135fd0dcdd70abc79eed147fec685a73a4b6507126577a813d86";
                                       };
       } );
     };
