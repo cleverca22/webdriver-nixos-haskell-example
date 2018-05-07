@@ -1,14 +1,71 @@
 # webdriver-nixos-haskell-example
 
+# Status
 
 Trying to get a simple webdriver example working using the webdriver package from hackage and native packages selenium-server-standalone and chromeDriver.
 
+error:
 
-# Status
+```
+19:37:01.839 INFO - Default driver org.openqa.selenium.chrome.ChromeDriver registration is skipped: registration capabilities Capabilit
+ies [{browserName=chrome, version=, platform=ANY}] does not match with current platform: LINUX                                        
+```
+
+Oh how do I register the chromeDriver capability?
+
+Let's look at contents of /nix/store/skb6f5vi7hw4nsa5la93sw03wz8zaczv-selenium-server-standalone-2.39.0/bin/selenium-server                                       
+
+```
+#! /nix/store/jgw8hxx7wzkyhb2dr9hwsd9h2caaasdc-bash-4.4-p12/bin/bash -e
+exec "/nix/store/5j684485jngz1ws3cdamslss2jss2xln-openjdk-8u172b02-jre/bin/java"  -cp /nix/store/c0znmi0ig46lv9qmbykclvwy7hcpympv-htmlunit-driver-standalone-2.21/share/lib/htmlunit-driver-standalone-2.21/htmlunit-driver-standalone-2.21.jar:/nix/store/skb6f5vi7hw4nsa5la93sw03wz8zaczv-selenium-server-standalone-2.39.0/share/lib/selenium-server-standalone-2.53.0/selenium-server-standalone-2.53.0.jar -Dwebdriver.chrome.driver=/nix/store/285lapwgrwl4pnay19f82bsxi1d43fnw-chromedriver-2.31/bin/chromedriver org.openqa.grid.selenium.GridLauncher "${extraFlagsArray[@]}" "$@"
+```
+
+That should be fine I think? Wait do I actually have chrome installed? Well I do for sure now. But error still persists.
+
+It isn't seeming to register chromedriver:
+
+```
+19:44:57.185 INFO - Default driver org.openqa.selenium.safari.SafariDriver registration is skipped: registration capabilities Capabilit
+ies [{browserName=safari, version=, platform=MAC}] does not match with current platform: LINUX                                        
+19:44:57.185 INFO - Default driver org.openqa.selenium.chrome.ChromeDriver registration is skipped: registration capabilities Capabilit
+ies [{browserName=chrome, version=, platform=ANY}] does not match with current platform: LINUX                                        
+```
+
+# Older Status
+
+I've been working under the assumption that the haskell webdriver bindings autostart the selenium server but that doesn't make sense.
+
+So searched and found the jars:
+
+```
+nix/store/88d05cqa56p4dk0dp0v91jjvh0kf9rdw-selenium-server-standalone-2.53.0/bin/selenium-server
+/nix/store/88d05cqa56p4dk0dp0v91jjvh0kf9rdw-selenium-server-standalone-2.53.0/share/lib/selenium-server-standalone-2.53.0
+/nix/store/88d05cqa56p4dk0dp0v91jjvh0kf9rdw-selenium-server-standalone-2.53.0/share/lib/selenium-server-standalone-2.53.0/selenium-server-standalone-2.53.0.jar
+/nix/store/1lardhpdd4ddgz96xin9df3wjm4564b9-selenium-server-standalone-2.53.1
+/nix/store/1lardhpdd4ddgz96xin9df3wjm4564b9-selenium-server-standalone-2.53.1/bin/selenium-server
+/nix/store/1lardhpdd4ddgz96xin9df3wjm4564b9-selenium-server-standalone-2.53.1/share/lib/selenium-server-standalone-2.53.0
+/nix/store/1lardhpdd4ddgz96xin9df3wjm4564b9-selenium-server-standalone-2.53.1/share/lib/selenium-server-standalone-2.53.0/selenium-server-standalone-2.53.0.jar
+/nix/store/za0p558li07d94grz0p9lwx9xyxjfw6v-selenium-server-standalone-2.43.1
+/nix/store/za0p558li07d94grz0p9lwx9xyxjfw6v-selenium-server-standalone-2.43.1/bin/selenium-server
+/nix/store/za0p558li07d94grz0p9lwx9xyxjfw6v-selenium-server-standalone-2.43.1/share/lib/selenium-server-standalone-2.53.0
+/nix/store/za0p558li07d94grz0p9lwx9xyxjfw6v-selenium-server-standalone-2.43.1/share/lib/selenium-server-standalone-2.53.0/selenium-server-standalone-2.53.0.jar
+/nix/store/skb6f5vi7hw4nsa5la93sw03wz8zaczv-selenium-server-standalone-2.39.0
+/nix/store/skb6f5vi7hw4nsa5la93sw03wz8zaczv-selenium-server-standalone-2.39.0/bin/selenium-server
+/nix/store/skb6f5vi7hw4nsa5la93sw03wz8zaczv-selenium-server-standalone-2.39.0/share/lib/selenium-server-standalone-2.53.0
+/nix/store/skb6f5vi7hw4nsa5la93sw03wz8zaczv-selenium-server-standalone-2.39.0/share/lib/selenium-server-standalone-2.53.0/selenium-server-standalone-2.53.0.jar
+
+```
+
+Will add java and start one of those up.
+
+# Older Status
 
 Apparently [hs-webdriver](https://github.com/kallisti-dev/hs-webdriver/issues/126) has a bug it looks like... or there was a change in seleniums api before 2.39.0
 
 https://github.com/kallisti-dev/hs-webdriver/issues/126#issuecomment-386928303
+
+
+curl -O http://selenium-release.storage.googleapis.com/2.39/selenium-server-standalone-2.0.0.jar
 
 # Older Status
 
