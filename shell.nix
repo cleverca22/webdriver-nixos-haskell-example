@@ -16,7 +16,7 @@ let
   pkgs = import <nixpkgs> { inherit config; };
 
   f = { mkDerivation, base, chromedriver
-      , selenium-server-standalone, stdenv, webdriver
+      , selenium-server-standalone, stdenv, webdriver, jdk, chromium
       }:
       mkDerivation {
         pname = "webdriver-nixos-haskell-example";

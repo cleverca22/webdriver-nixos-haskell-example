@@ -1,5 +1,5 @@
 { mkDerivation, base, chromedriver, selenium-server-standalone
-, stdenv, webdriver
+, stdenv, webdriver, jdk, chromium
 }:
 mkDerivation {
   pname = "webdriver-nixos-haskell-example";
